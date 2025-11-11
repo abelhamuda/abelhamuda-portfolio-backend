@@ -25,7 +25,9 @@ WORKDIR /root/
 
 # Copy hasil build dari stage pertama
 COPY --from=builder /app/main .
-COPY --from=builder /app/uploads ./uploads
+
+# Buat folder uploads agar tidak error
+RUN mkdir -p ./uploads
 
 # Expose port (Railway akan otomatis override)
 EXPOSE 8080
