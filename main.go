@@ -69,14 +69,19 @@ func main() {
 	protected.HandleFunc("/articles", articleHandler.CreateArticle).Methods("POST")
 	protected.HandleFunc("/articles/{id}", articleHandler.UpdateArticle).Methods("PUT")
 	protected.HandleFunc("/articles/{id}", articleHandler.DeleteArticle).Methods("DELETE")
-	protected.HandleFunc("/upload", articleHandler.UploadImage).Methods("POST") // Image upload
+	protected.HandleFunc("/upload", articleHandler.UploadImage).Methods("POST")
 	protected.HandleFunc("/projects", projectHandler.CreateProject).Methods("POST")
 	protected.HandleFunc("/projects/{id}", projectHandler.UpdateProject).Methods("PUT")
 	protected.HandleFunc("/projects/{id}", projectHandler.DeleteProject).Methods("DELETE")
 
 	// Configure CORS
 	c := cors.New(cors.Options{
-		AllowedOrigins:   []string{"http://localhost:5173", "http://127.0.0.1:5173"},
+		AllowedOrigins: []string{
+			"http://localhost:5173",
+			"http://127.0.0.1:5173",
+			"https://abelhamuda.my.id",
+			"*",
+		},
 		AllowedMethods:   []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
 		AllowedHeaders:   []string{"Content-Type", "Authorization", "X-Requested-With"},
 		AllowCredentials: true,
