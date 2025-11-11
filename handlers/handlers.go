@@ -110,7 +110,7 @@ func (h *ArticleHandler) Login(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	if loginReq.Email == "admin@abelhamuda.com" && loginReq.Password == "admin123" {
+	if loginReq.Email == "yozabelhamuda@gmail.com" && loginReq.Password == "Abelpohan123!" {
 		token := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
 			"email": loginReq.Email,
 			"exp":   time.Now().Add(time.Hour * 24).Unix(),
