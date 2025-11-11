@@ -1,14 +1,15 @@
 package models
 
 type Article struct {
-	ID        int    `json:"id"`
-	Title     string `json:"title"`
-	Slug      string `json:"slug"`
-	Content   string `json:"content"`
-	Category  string `json:"category"`
-	Tags      string `json:"tags"`
-	CreatedAt string `json:"created_at"`
-	UpdatedAt string `json:"updated_at"`
+	ID          int    `json:"id"`
+	Title       string `json:"title"`
+	Slug        string `json:"slug"`
+	Content     string `json:"content"`
+	ContentType string `json:"content_type"`
+	Category    string `json:"category"`
+	Tags        string `json:"tags"`
+	CreatedAt   string `json:"created_at"`
+	UpdatedAt   string `json:"updated_at"`
 }
 
 type Stats struct {
@@ -38,4 +39,8 @@ type Project struct {
 	LiveURL      string `json:"live_url"`
 	CreatedAt    string `json:"created_at"`
 	UpdatedAt    string `json:"updated_at"`
+}
+
+type ImageUploadResponse struct {
+	URL string `json:"url"`
 }

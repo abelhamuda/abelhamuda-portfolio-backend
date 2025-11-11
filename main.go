@@ -52,6 +52,9 @@ func main() {
 	// Router
 	r := mux.NewRouter()
 
+	// Serve static files (uploads)
+	r.PathPrefix("/uploads/").Handler(http.StripPrefix("/uploads/", http.FileServer(http.Dir("./uploads"))))
+
 	// Public routes
 	r.HandleFunc("/api/articles", articleHandler.GetArticles).Methods("GET")
 	r.HandleFunc("/api/articles/{slug}", articleHandler.GetArticleBySlug).Methods("GET")
@@ -66,6 +69,7 @@ func main() {
 	protected.HandleFunc("/articles", articleHandler.CreateArticle).Methods("POST")
 	protected.HandleFunc("/articles/{id}", articleHandler.UpdateArticle).Methods("PUT")
 	protected.HandleFunc("/articles/{id}", articleHandler.DeleteArticle).Methods("DELETE")
+	protected.HandleFunc("/upload", articleHandler.UploadImage).Methods("POST") // Image upload
 	protected.HandleFunc("/projects", projectHandler.CreateProject).Methods("POST")
 	protected.HandleFunc("/projects/{id}", projectHandler.UpdateProject).Methods("PUT")
 	protected.HandleFunc("/projects/{id}", projectHandler.DeleteProject).Methods("DELETE")
@@ -76,7 +80,7 @@ func main() {
 		AllowedMethods:   []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
 		AllowedHeaders:   []string{"Content-Type", "Authorization", "X-Requested-With"},
 		AllowCredentials: true,
-		Debug:            true, // Optional: untuk melihat log CORS
+		Debug:            true,
 	})
 
 	// Wrap the router with CORS middleware
